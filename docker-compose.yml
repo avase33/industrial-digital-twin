@@ -1,0 +1,35 @@
+services:
+  topology:
+    build: ./topology-rust
+    environment:
+      TOPOLOGY_ADDR: 0.0.0.0:8092
+    ports:
+      - "8092:8092"
+
+  intelligence:
+    build: ./intelligence-python
+    environment:
+      IDT_LLM: mock
+    ports:
+      - "8000:8000"
+
+  hub:
+    build: ./hub-go
+    environment:
+      IDT_ADDR: ":8080"
+      IDT_INTEL_URL: http://intelligence:8000
+      IDT_TICK_MS: "1000"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - intelligence
+      - topology
+
+  interface:
+    build: ./interface-ts
+    environment:
+      NEXT_PUBLIC_GATEWAY_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      - hub

@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Go
+/hub-go/idt-hub
+*.test
+
+# Rust
+/topology-rust/target/
+
+# Node / Next.js
+node_modules/
+/interface-ts/.next/
+/interface-ts/out/
+
+# env / editors / OS
+.env
+.vscode/
+.idea/
+.DS_Store

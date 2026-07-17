@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "idt-intelligence"
+version = "0.1.0"
+description = "industrial-digital-twin intelligence: from-scratch spatial GNN anomaly detection + repair agent"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []  # from-scratch GNN, no torch/torch-geometric; runs offline
+
+[project.optional-dependencies]
+server = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+openai = ["openai>=1.30"]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+idt-intelligence = "idt_intelligence.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["idt_intelligence*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
